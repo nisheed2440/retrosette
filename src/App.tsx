@@ -1,8 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import { useQuery } from "@tanstack/react-query";
+import { getSearchResults } from "./utils";
+import "./App.css";
 
 function App() {
+  const { data, isLoading, error } = useQuery(["authorize"], () => {
+    return getSearchResults("Queen");
+  });
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +24,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <p>{isLoading ? "Loading..." : "Authorized"}</p>
+      <p>{error ? (error as Error).message : ""}</p>
+      <p>{data ? JSON.stringify(data) : ""}</p>
     </div>
   );
 }
