@@ -96,6 +96,10 @@ export class NFC {
     });
   }
 
+  public async scan() {
+    return this._ndef?.scan();
+  }
+
   static supportsNDEFReader(): boolean {
     return "NDEFReader" in window;
   }

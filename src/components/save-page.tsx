@@ -10,7 +10,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { Clear, ConstructionOutlined } from "@mui/icons-material";
+import { Clear } from "@mui/icons-material";
 import AlertDialog from "./alert-dialog";
 import save from "../assets/save.svg";
 import { NFC } from "../utils/nfc";
