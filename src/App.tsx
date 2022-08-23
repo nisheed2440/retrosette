@@ -1,33 +1,29 @@
-import React from "react";
-import logo from "./logo.svg";
-import { useQuery } from "@tanstack/react-query";
-import { getSearchResults } from "./utils";
+import React, { useEffect, useState } from "react";
+import { Container, AppBar, Typography, Box, Toolbar } from "@mui/material";
 import "./App.css";
+import ErrorPage from "./components/error-page";
+import SavePage from "./components/save-page";
+import { NFC } from "./utils/nfc";
 
 function App() {
-  const { data, isLoading, error } = useQuery(["authorize"], () => {
-    return getSearchResults("Queen");
-  });
+  const [nfcSupported, setNfcSupported] = useState(false);
+
+  useEffect(() => {
+    setNfcSupported(NFC.supportsNDEFReader());
+  }, [setNfcSupported]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <p>{isLoading ? "Loading..." : "Authorized"}</p>
-      <p>{error ? (error as Error).message : ""}</p>
-      <p>{data ? JSON.stringify(data) : ""}</p>
-    </div>
+    <Container maxWidth={"sm"} sx={{ paddingX: 0 }}>
+      <Box>
+        <AppBar color={"default"}>
+          <Toolbar variant="dense">
+            <Typography variant="h6">Retro-sette</Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      {!nfcSupported && <ErrorPage />}
+      {nfcSupported && <SavePage />}
+    </Container>
   );
 }
 
