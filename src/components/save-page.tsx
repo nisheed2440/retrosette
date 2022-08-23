@@ -10,7 +10,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { Clear } from "@mui/icons-material";
+import { Clear, ConstructionOutlined } from "@mui/icons-material";
 import AlertDialog from "./alert-dialog";
 import save from "../assets/save.svg";
 import { NFC } from "../utils/nfc";
@@ -68,10 +68,10 @@ export const SavePage: FC<{}> = () => {
     async (type: string, id: string) => {
       if (nfcRef.current) {
         ctlrRef.current = new AbortController();
-        await nfcRef.current.scan();
         try {
           // Let's wait for 5 seconds only.
           console.log(`spotify:${type}:${id}`);
+          console.log("Writing to NFC");
           await nfcRef.current.write(`spotify:${type}:${id}`, {
             timeout: 5_000,
             ctlr: ctlrRef.current,
@@ -126,7 +126,7 @@ export const SavePage: FC<{}> = () => {
   return (
     <>
       <Stack sx={{ height: "100%" }}>
-        <Box sx={{ flex: 1, overflowY: "auto" }}>
+        <Box sx={{ flex: 1 }}>
           <Stack sx={{ height: "100%" }}>
             <Box
               sx={{ paddingTop: "110px", paddingX: "8px", textAlign: "center" }}

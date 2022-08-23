@@ -13,7 +13,7 @@ function App() {
   }, [setNfcSupported]);
 
   return (
-    <Container maxWidth={"sm"} sx={{ paddingX: 0 }}>
+    <Container maxWidth={"sm"}>
       <Box>
         <AppBar color={"default"}>
           <Toolbar variant="dense">

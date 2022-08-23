@@ -6,7 +6,7 @@ import nfcError from "../assets/nfc-red.svg";
 export const ErrorPage: FC<{}> = () => {
   return (
     <Stack sx={{ height: "100%" }}>
-      <Box sx={{ flex: 1, overflowY: "auto" }}>
+      <Box sx={{ flex: 1 }}>
         <Stack sx={{ height: "100%" }}>
           <Box
             sx={{ paddingTop: "110px", paddingX: "8px", textAlign: "center" }}

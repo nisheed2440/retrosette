@@ -84,27 +84,16 @@ export class NFC {
     return new Promise((resolve, reject) => {
       ctlr.signal.onabort = () => reject("Time is up, bailing out!");
       setTimeout(() => ctlr.abort(), timeout);
-      // Add event listener to read NFC and immediately write to it.
-      this._ndef?.addEventListener(
-        "reading",
-        () => {
-          // Write URI to NFC as soon as it is read
-          this._ndef
-            ?.write(
-              {
-                records: [{ recordType: "url", data: uri }],
-              },
-              { signal: ctlr.signal }
-            )
-            .then(resolve, reject);
-        },
-        { once: true }
-      );
+      // Write URI to NFC as soon as it is read
+      this._ndef
+        ?.write(
+          {
+            records: [{ recordType: "url", data: uri }],
+          },
+          { signal: ctlr.signal }
+        )
+        .then(resolve, reject);
     });
-  }
-
-  public async scan() {
-    return this._ndef?.scan();
   }
 
   static supportsNDEFReader(): boolean {
